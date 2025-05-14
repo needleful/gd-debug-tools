@@ -103,11 +103,14 @@ class Box:
 		LiveDebug.swim(panel)
 		LiveDebug.swim(box)
 
-@onready var pause_button: CheckBox = $PanelContainer/VBoxContainer/HBoxContainer/pause
-@onready var frames_counter:Label = $PanelContainer/VBoxContainer/framerate
+@onready var pause_button: CheckBox = $panel/grid/pause
+@onready var console_button: CheckBox = $panel/grid/console
+@onready var frames_counter:Label = $panel/grid/framerate
+@onready var console:DebugConsole = $debug_console
 var debug_box: Box = null
 var active := false
 var average_ms := 0.0
+var default_mouse_mode = null
 
 func _init():
 	pool = {}
@@ -115,6 +118,7 @@ func _init():
 func _ready():
 	set_physics_process(false)
 	pause_button.toggled.connect(_on_pause_toggled)
+	console_button.toggled.connect(_on_console_toggled)
 	set_active(false)
 
 func set_active(a: bool):
@@ -122,10 +126,11 @@ func set_active(a: bool):
 	visible = active
 	set_process(a)
 	if a:
+		default_mouse_mode = Input.mouse_mode
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		_on_pause_toggled(TimeManagement.paused)
-	else:
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		get_tree().paused = true
+	elif default_mouse_mode != null:
+		Input.mouse_mode = default_mouse_mode
 
 func _input(event: InputEvent):
 	if event.is_action_pressed('toggle_live_debug'):
@@ -144,7 +149,7 @@ func _process(delta: float) -> void:
 
 func _get_object(uv: Vector2) -> Node:
 	var cam := get_viewport().get_camera_3d()
-	var phys:PhysicsDirectSpaceState3D = Global.get_world()
+	var phys:PhysicsDirectSpaceState3D = cam.get_world_3d().direct_space_state
 	assert(phys)
 	var q := PhysicsRayQueryParameters3D.new()
 	q.from = cam.project_ray_origin(uv)
@@ -215,11 +220,7 @@ func dry(c_name: String):
 func _on_pause_toggled(pause: bool):
 	if !is_inside_tree():
 		return
-	TimeManagement.paused = pause
-	var player = Global.get_player()
-	if !player or !player.cam_rig:
-		return
-	if pause:
-		player.cam_rig.process_mode = PROCESS_MODE_ALWAYS
-	else:
-		player.cam_rig.process_mode = PROCESS_MODE_PAUSABLE
+	get_tree().paused = pause
+
+func _on_console_toggled(show: bool):
+	console.visible = show
