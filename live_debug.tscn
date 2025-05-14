@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvihn11gu0o2b"]
+
+[ext_resource type="Script" uid="uid://qa2ftj4eq8pj" path="res://ui/debug/live_debug.gd" id="1"]
+
+[node name="live_debug" type="CanvasLayer"]
+process_mode = 3
+layer = 2
+script = ExtResource("1")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+process_mode = 3
+offset_right = 14.0
+offset_bottom = 14.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Live Debug. Middle-Mouse-Click to view object properties"
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+process_mode = 3
+layout_mode = 2
+
+[node name="pause" type="CheckBox" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Paused"
+
+[node name="framerate" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Framerate:"
