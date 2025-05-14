@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://cvihn11gu0o2b"]
 
-[ext_resource type="Script" uid="uid://qa2ftj4eq8pj" path="res://ui/debug/live_debug.gd" id="1"]
+[ext_resource type="Script" uid="uid://psuoh7dj4iky" path="res://addons/gd-debug-tools/live_debug.gd" id="1"]
+
 
 [node name="live_debug" type="CanvasLayer"]
 process_mode = 3
