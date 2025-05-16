@@ -128,7 +128,7 @@ func set_active(a: bool):
 	if a:
 		default_mouse_mode = Input.mouse_mode
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		get_tree().paused = true
+		get_tree().paused = pause_button.button_pressed
 	elif default_mouse_mode != null:
 		Input.mouse_mode = default_mouse_mode
 

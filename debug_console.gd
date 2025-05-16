@@ -5,8 +5,6 @@ extends Control
 @onready var logs := $VBoxContainer/ScrollContainer/logs
 @onready var scroll := $VBoxContainer/ScrollContainer
 
-var show_stats := false
-
 var history: Array
 var index := 0
 var cheats
@@ -106,3 +104,24 @@ func view_history(offset):
 
 func time_scale(s:float):
 	Engine.time_scale = s
+
+func print_dict(d: Dictionary):
+	var t := Tree.new()
+	t.columns = 2
+	var root := t.create_item()
+	_print_dict(d, t, root)
+	t.custom_minimum_size.y = 900
+	logs.add_child(t)
+	return true
+
+func _print_dict(d:Dictionary, tree: Tree, t:TreeItem):
+	for k in d:
+		var v = d[k]
+		var sub := tree.create_item(t)
+		sub.set_text(0, k)
+		if v is Dictionary:
+			sub.set_text(1, '...')
+			_print_dict(v, tree, sub)
+		else:
+			sub.set_text(1, str(v))
+	t.collapsed = true

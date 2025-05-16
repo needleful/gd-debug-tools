@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cvihn11gu0o2b"]
 
-[ext_resource type="Script" uid="uid://psuoh7dj4iky" path="res://addons/gd-debug-tools/live_debug.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://c7n07n2oeilpb" path="res://addons/gd-debug-tools/debug_console.tscn" id="2_142hp"]
+[ext_resource type="Script" uid="uid://psuoh7dj4iky" path="res://addons/np-debug/live_debug.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://c7n07n2oeilpb" path="res://addons/np-debug/debug_console.tscn" id="2_142hp"]
 
 [node name="live_debug" type="CanvasLayer"]
 process_mode = 3
@@ -9,6 +9,11 @@ layer = 2
 script = ExtResource("1")
 
 [node name="debug_console" parent="." instance=ExtResource("2_142hp")]
+anchors_preset = -1
+anchor_top = 0.128
+anchor_right = 0.609
+offset_top = 0.0559998
+offset_right = -0.568054
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -30,6 +35,7 @@ text = "Live Debug. Middle-Mouse-Click to view object properties"
 process_mode = 3
 layout_mode = 2
 text = "Paused"
+flat = true
 
 [node name="framerate" type="Label" parent="panel/grid"]
 layout_mode = 2
@@ -40,3 +46,4 @@ process_mode = 3
 layout_mode = 2
 button_pressed = true
 text = "Show Console"
+flat = true
