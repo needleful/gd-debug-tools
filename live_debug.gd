@@ -163,6 +163,7 @@ func _get_object(uv: Vector2) -> Node:
 
 func _physics_process(_delta:float):
 	var obj := _get_object(col_request)
+	console.variables['this'] = obj
 	if obj:
 		if debug_box:
 			debug_box.clear()
