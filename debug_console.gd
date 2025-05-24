@@ -11,6 +11,7 @@ var cheats
 var dict: Dictionary
 # Meant to be overridden to add parse-time variables
 var variables: Dictionary
+var old_mouse_mode := Input.mouse_mode
 
 func _init():
 	history = []
@@ -35,10 +36,17 @@ func _input(event: InputEvent):
 
 func _notification(what):
 	if what == NOTIFICATION_VISIBILITY_CHANGED and line_edit:
-		set_process_input(is_visible_in_tree())
-		if is_visible_in_tree():
-			line_edit.grab_focus.call_deferred()
-			line_edit.text = ''
+		set_active(is_visible_in_tree())
+
+func set_active(active: bool):
+	set_process_input(active)
+	if active:
+		old_mouse_mode = Input.mouse_mode
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		line_edit.grab_focus.call_deferred()
+		line_edit.text = ''
+	else:
+		Input.mouse_mode = old_mouse_mode
 
 func _on_text_submitted(new_text: String):
 	if cheats and cheats.has_method(new_text):
