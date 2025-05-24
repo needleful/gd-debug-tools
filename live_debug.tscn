@@ -34,6 +34,7 @@ text = "Live Debug. Middle-Mouse-Click to view object properties"
 [node name="pause" type="CheckBox" parent="panel/grid"]
 process_mode = 3
 layout_mode = 2
+button_pressed = true
 text = "Paused"
 flat = true
 
