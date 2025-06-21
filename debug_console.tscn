@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c7n07n2oeilpb"]
 
-[ext_resource type="Script" uid="uid://byije1krt63dp" path="res://addons/gd-debug-tools/debug_console.gd" id="2_xa4wo"]
+[ext_resource type="Script" path="res://addons/np-debug/debug_console.gd" id="2_xa4wo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_by4xb"]
 content_margin_left = 0.0
