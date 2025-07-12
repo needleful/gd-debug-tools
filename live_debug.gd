@@ -133,9 +133,7 @@ func set_active(a: bool):
 		Input.mouse_mode = default_mouse_mode
 
 func _input(event: InputEvent):
-	if event.is_action_pressed('toggle_live_debug'):
-		set_active(!active)
-	elif active:
+	if active:
 		if event is InputEventMouseButton and event.is_pressed() and (
 			event.button_index == MOUSE_BUTTON_MIDDLE
 		):
