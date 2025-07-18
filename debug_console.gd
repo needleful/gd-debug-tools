@@ -70,6 +70,8 @@ func _on_text_submitted(new_text: String):
 	var output = ex.execute(variables.values(), self)
 	if ex.has_execute_failed():
 		echo(ex.get_error_text() + str(output))
+	elif output is Dictionary:
+		print_dict(output)
 	elif output != null:
 		echo(str(output))
 	scroll.scroll_vertical = scroll.get_v_scroll_bar().max_value
