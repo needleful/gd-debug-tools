@@ -121,6 +121,9 @@ func _ready():
 	console_button.toggled.connect(_on_console_toggled)
 	set_active(false)
 
+func toggle():
+	set_active(!active)
+
 func set_active(a: bool):
 	active = a
 	visible = active
